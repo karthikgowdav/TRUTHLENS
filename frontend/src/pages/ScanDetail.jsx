@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getScanById } from '../services/scanService';
 import VerdictBadge from '../components/scan/VerdictBadge';
+import Spinner from '../components/ui/Spinner';
 
 export default function ScanDetail() {
   const { id } = useParams();
@@ -23,48 +24,43 @@ export default function ScanDetail() {
     fetchScan();
   }, [id]);
 
-  if (loading) return <div style={{ padding: '24px' }}>Loading...</div>;
-  if (error) return <div style={{ padding: '24px', color: '#DC2626' }}>{error}</div>;
-  if (!scan) return <div style={{ padding: '24px' }}>Scan not found.</div>;
+  if (loading) return <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6"><Spinner label="Loading scan detail..." /></div>;
+  if (error) return <div className="mx-auto w-full max-w-7xl px-4 py-8 text-rose-300 sm:px-6">{error}</div>;
+  if (!scan) return <div className="mx-auto w-full max-w-7xl px-4 py-8 text-slate-300 sm:px-6">Scan not found.</div>;
 
   return (
-    <div style={{ padding: '24px', fontFamily: 'sans-serif' }}>
-      <h1 style={{ fontSize: '28px', fontWeight: '700', marginBottom: '16px' }}>Scan Detail</h1>
-      <div style={{ display: 'grid', gap: '12px', maxWidth: '700px' }}>
-        <div>
-          <strong>Scan ID:</strong> {scan.scan_id}
-        </div>
-        <div>
-          <strong>Media Type:</strong> {scan.media_type}
-        </div>
-        <div>
-          <strong>Verdict:</strong> <VerdictBadge verdict={scan.verdict} />
-        </div>
-        <div>
-          <strong>Confidence:</strong> {scan.confidence}%
-        </div>
-        <div>
-          <strong>AI Platform:</strong> {scan.ai_platform || '-'}
-        </div>
-        <div>
-          <strong>Has C2PA:</strong> {String(scan.has_c2pa)}
-        </div>
-        <div>
-          <strong>Has EXIF:</strong> {String(scan.has_exif)}
-        </div>
-        <div>
-          <strong>ELA Score:</strong> {scan.ela_score}
-        </div>
-        <div>
-          <strong>Forensic Flags:</strong> {scan.forensic_flags?.length ? scan.forensic_flags.join(', ') : '-'}
-        </div>
-        <div>
-          <strong>Processing:</strong> {scan.processing_ms}ms
-        </div>
-        <div>
-          <strong>Created:</strong> {scan.created_at}
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
+      <h1 className="mb-4 text-3xl font-black text-white sm:text-4xl">Scan Detail</h1>
+      <div className="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-6 shadow-xl backdrop-blur-xl">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          <DetailItem label="Scan ID" value={scan.scan_id} />
+          <DetailItem label="Media Type" value={scan.media_type} />
+          <div>
+            <strong className="text-cyan-300">{'Verdict'}</strong>
+            <div className="mt-1.5"><VerdictBadge verdict={scan.verdict} /></div>
+          </div>
+          <DetailItem label="Confidence" value={`${scan.confidence}%`} />
+          <DetailItem label="AI Platform" value={scan.ai_platform || '-'} />
+          <DetailItem label="Has C2PA" value={String(scan.has_c2pa)} />
+          <DetailItem label="Has EXIF" value={String(scan.has_exif)} />
+          <DetailItem label="ELA Score" value={scan.ela_score} />
+          <DetailItem label="Processing" value={`${scan.processing_ms}ms`} />
+          <DetailItem label="Created" value={scan.created_at} />
+          <div className="sm:col-span-2 xl:col-span-3">
+            <strong className="text-cyan-300">Forensic Flags</strong>
+            <p className="mt-1.5 text-slate-300">{scan.forensic_flags?.length ? scan.forensic_flags.join(', ') : '-'}</p>
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function DetailItem({ label, value }) {
+  return (
+    <div>
+      <strong className="text-cyan-300">{label}</strong>
+      <p className="mt-1.5 text-slate-300">{value}</p>
     </div>
   );
 }

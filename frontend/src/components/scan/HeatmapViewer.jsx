@@ -13,7 +13,7 @@ export default function HeatmapViewer({ score = 0 }) {
           border: '1px solid #374151',
         }}
       />
-      <p style={{ marginTop: '8px', color: '#6b7280', fontSize: '12px' }}>
+      <p style={{ marginTop: '8px', color: '#94a3b8', fontSize: '12px' }}>
         Forensic heatmap preview - score {intensity}
       </p>
     </div>

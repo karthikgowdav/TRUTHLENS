@@ -10,15 +10,8 @@ export default function VerdictBadge({ verdict }) {
 
   return (
     <span
-      style={{
-        background: colors.bg,
-        color: colors.text,
-        border: `1px solid ${colors.border}`,
-        padding: '2px 10px',
-        borderRadius: '9999px',
-        fontSize: '12px',
-        fontWeight: '600',
-      }}
+      className="inline-flex rounded-full border px-3 py-1 text-[11px] font-semibold tracking-wider"
+      style={{ background: `${colors.bg}22`, color: colors.text, borderColor: colors.border }}
     >
       {labels[verdict] || verdict?.toUpperCase?.() || 'UNKNOWN'}
     </span>

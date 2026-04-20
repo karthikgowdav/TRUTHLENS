@@ -1,16 +1,11 @@
 export default function MetricCard({ label, value, sub, color = '#4f46e5' }) {
   return (
-    <div
-      style={{
-        background: '#f9fafb',
-        borderRadius: '12px',
-        padding: '20px',
-        textAlign: 'center',
-      }}
-    >
-      <p style={{ fontSize: '13px', color: '#6b7280', margin: '0 0 8px' }}>{label}</p>
-      <p style={{ fontSize: '32px', fontWeight: '700', color, margin: '0 0 4px' }}>{value}</p>
-      {sub && <p style={{ fontSize: '12px', color: '#9ca3af', margin: 0 }}>{sub}</p>}
+    <div className="group rounded-2xl border border-slate-700/70 bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 p-5 shadow-xl transition hover:-translate-y-1 hover:border-cyan-400/35 hover:shadow-cyan-900/20">
+      <p className="mb-2 text-[11px] uppercase tracking-[0.12em] text-cyan-300">{label}</p>
+      <p className="mb-1 text-3xl font-extrabold leading-none transition group-hover:scale-[1.02]" style={{ color }}>
+        {value}
+      </p>
+      {sub && <p className="text-xs text-slate-400">{sub}</p>}
     </div>
   );
 }

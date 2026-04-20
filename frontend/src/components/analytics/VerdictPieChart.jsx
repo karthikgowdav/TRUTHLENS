@@ -19,8 +19,15 @@ export default function VerdictPieChart({ stats }) {
             <Cell key={index} fill={COLORS[entry.name.toLowerCase()]} />
           ))}
         </Pie>
-        <Tooltip />
-        <Legend />
+        <Tooltip
+          contentStyle={{
+            background: 'rgba(15, 23, 42, 0.95)',
+            border: '1px solid rgba(148, 163, 184, 0.2)',
+            borderRadius: '10px',
+            color: '#e2e8f0',
+          }}
+        />
+        <Legend wrapperStyle={{ color: '#cbd5e1' }} />
       </PieChart>
     </ResponsiveContainer>
   );

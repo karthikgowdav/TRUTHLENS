@@ -2,20 +2,10 @@ export default function SystemStatusBar({ health }) {
   const online = health?.status === 'ok';
   return (
     <div
-      style={{
-        padding: '8px 14px',
-        borderRadius: '9999px',
-        fontSize: '13px',
-        fontWeight: 600,
-        background: online ? '#DCFCE7' : '#FEE2E2',
-        color: online ? '#16A34A' : '#DC2626',
-        display: 'inline-flex',
-        gap: '8px',
-        alignItems: 'center',
-      }}
+      className={`inline-flex items-center gap-2 rounded-full border px-3 py-2 text-xs font-semibold ${online ? 'border-emerald-400/40 bg-emerald-500/15 text-emerald-300' : 'border-rose-400/40 bg-rose-500/15 text-rose-300'}`}
     >
       <span>{online ? 'System Online' : 'System Offline'}</span>
-      <span style={{ opacity: 0.8 }}>Model: {health?.model_loaded ? 'Loaded' : 'Not Loaded'}</span>
+      <span className="opacity-80">Model: {health?.model_loaded ? 'Loaded' : 'Not Loaded'}</span>
     </div>
   );
 }

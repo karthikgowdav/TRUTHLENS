@@ -9,17 +9,20 @@ import Spinner from '../components/ui/Spinner';
 export default function Analytics() {
   const { stats, health, loading } = useStats();
 
-  if (loading) return <div style={{ padding: '24px' }}><Spinner label="Loading analytics..." /></div>;
+  if (loading) return <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6"><Spinner label="Loading analytics..." /></div>;
 
   return (
-    <div style={{ padding: '24px', fontFamily: 'sans-serif' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-        <h1 style={{ fontSize: '28px', fontWeight: '700' }}>Analytics</h1>
+    <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div className="space-y-2">
+          <h1 className="text-3xl font-black text-white sm:text-4xl">Analytics</h1>
+          <p className="text-slate-400">Performance trends, verdict breakdown, and model health indicators.</p>
+        </div>
         <SystemStatusBar health={health} />
       </div>
 
       {stats && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '32px' }}>
+        <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
           <MetricCard label="Total Scans" value={stats.total_scans} />
           <MetricCard label="Deepfakes Caught" value={stats.deepfake_count} color="#DC2626" />
           <MetricCard label="Deepfake Ratio" value={`${stats.deepfake_ratio}%`} />
@@ -27,7 +30,7 @@ export default function Analytics() {
         </div>
       )}
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
         <Card title="Verdict Distribution">
           <VerdictPieChart stats={stats} />
         </Card>

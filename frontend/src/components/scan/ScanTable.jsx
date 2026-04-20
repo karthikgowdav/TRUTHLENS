@@ -2,23 +2,25 @@ import ScanRow from './ScanRow';
 
 export default function ScanTable({ scans, onOpenModal }) {
   return (
-    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-      <thead>
-        <tr style={{ background: '#f9fafb', textAlign: 'left' }}>
-          <th style={{ padding: '12px', fontWeight: '600' }}>Type</th>
-          <th style={{ padding: '12px', fontWeight: '600' }}>Verdict</th>
-          <th style={{ padding: '12px', fontWeight: '600' }}>Confidence</th>
-          <th style={{ padding: '12px', fontWeight: '600' }}>Platform</th>
-          <th style={{ padding: '12px', fontWeight: '600' }}>Time</th>
-          <th style={{ padding: '12px', fontWeight: '600' }}>When</th>
-          <th style={{ padding: '12px', fontWeight: '600' }}>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {scans.map((scan, index) => (
-          <ScanRow key={scan.scan_id} scan={scan} index={index} onOpenModal={onOpenModal} />
-        ))}
-      </tbody>
-    </table>
+    <div className="overflow-x-auto rounded-2xl border border-slate-700/70">
+      <table className="min-w-[940px] w-full border-collapse">
+        <thead>
+          <tr className="bg-slate-800/80 text-left">
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">Type</th>
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">Verdict</th>
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">Confidence</th>
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">Platform</th>
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">Time</th>
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">When</th>
+            <th className="px-3.5 py-3 text-sm font-semibold text-cyan-300">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {scans.map((scan, index) => (
+            <ScanRow key={scan.scan_id} scan={scan} index={index} onOpenModal={onOpenModal} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 }
