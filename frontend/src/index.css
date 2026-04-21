@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 body {
-  @apply m-0 min-h-screen bg-slate-950 text-slate-100 antialiased;
+  @apply m-0 min-h-screen text-slate-100 antialiased;
   font-family: Inter, "Segoe UI", Roboto, sans-serif;
+  background: #0f172a;
   background-image:
-    radial-gradient(circle at 20% 15%, rgba(59, 130, 246, 0.23), transparent 30%),
-    radial-gradient(circle at 85% 10%, rgba(168, 85, 247, 0.18), transparent 35%),
-    linear-gradient(135deg, #020617 0%, #0f172a 55%, #111827 100%);
+    radial-gradient(circle at 20% 15%, rgba(59, 130, 246, 0.18), transparent 35%),
+    radial-gradient(circle at 85% 10%, rgba(168, 85, 247, 0.12), transparent 40%);
 }
 
 #root {

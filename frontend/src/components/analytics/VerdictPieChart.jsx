@@ -1,13 +1,13 @@
 import { Pie, PieChart, Cell, Legend, ResponsiveContainer, Tooltip } from 'recharts';
 
-const COLORS = { deepfake: '#DC2626', real: '#16A34A', inconclusive: '#D97706' };
+const COLORS = { deepfake: '#DC2626', real: '#16A34A' };
 
 export default function VerdictPieChart({ stats }) {
+  // Backend doesn't provide distribution array; derive manually from counts
   const pieData = stats
     ? [
-        { name: 'Deepfake', value: stats.deepfake_count },
-        { name: 'Real', value: stats.real_count },
-        { name: 'Inconclusive', value: stats.inconclusive_count },
+        { key: 'deepfake', name: 'Deepfake', value: Number(stats.deepfake_count || 0) },
+        { key: 'real', name: 'Real', value: Number(stats.real_count || 0) },
       ]
     : [];
 
@@ -16,7 +16,7 @@ export default function VerdictPieChart({ stats }) {
       <PieChart>
         <Pie data={pieData} cx="50%" cy="50%" outerRadius={100} dataKey="value" label>
           {pieData.map((entry, index) => (
-            <Cell key={index} fill={COLORS[entry.name.toLowerCase()]} />
+            <Cell key={entry.key || index} fill={COLORS[entry.key] || '#94a3b8'} />
           ))}
         </Pie>
         <Tooltip

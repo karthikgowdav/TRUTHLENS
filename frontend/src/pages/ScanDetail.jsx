@@ -31,7 +31,7 @@ export default function ScanDetail() {
   return (
     <div className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6">
       <h1 className="mb-4 text-3xl font-black text-white sm:text-4xl">Scan Detail</h1>
-      <div className="rounded-2xl border border-slate-700/70 bg-slate-900/70 p-6 shadow-xl backdrop-blur-xl">
+      <div className="rounded-2xl border border-slate-700/70 bg-[#1e293b] p-6 shadow-xl">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <DetailItem label="Scan ID" value={scan.scan_id} />
           <DetailItem label="Media Type" value={scan.media_type} />
@@ -40,12 +40,11 @@ export default function ScanDetail() {
             <div className="mt-1.5"><VerdictBadge verdict={scan.verdict} /></div>
           </div>
           <DetailItem label="Confidence" value={`${scan.confidence}%`} />
-          <DetailItem label="AI Platform" value={scan.ai_platform || '-'} />
-          <DetailItem label="Has C2PA" value={String(scan.has_c2pa)} />
-          <DetailItem label="Has EXIF" value={String(scan.has_exif)} />
-          <DetailItem label="ELA Score" value={scan.ela_score} />
+          <DetailItem label="Fake Probability" value={scan.fake_probability ?? '-'} />
+          <DetailItem label="Real Probability" value={scan.real_probability ?? '-'} />
+          <DetailItem label="Forensic Score" value={scan.forensic_score ?? '-'} />
           <DetailItem label="Processing" value={`${scan.processing_ms}ms`} />
-          <DetailItem label="Created" value={scan.created_at} />
+          <DetailItem label="Created" value={new Date(scan.created_at).toLocaleString()} />
           <div className="sm:col-span-2 xl:col-span-3">
             <strong className="text-cyan-300">Forensic Flags</strong>
             <p className="mt-1.5 text-slate-300">{scan.forensic_flags?.length ? scan.forensic_flags.join(', ') : '-'}</p>

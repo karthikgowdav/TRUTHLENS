@@ -8,9 +8,13 @@ export function useScans(verdict = 'all') {
   const [error, setError] = useState(null);
 
   const fetchScans = async () => {
+    setLoading(true);
     try {
       const res = await getScans(50, 0, verdict);
-      setScans(res?.data?.scans ?? []);
+      const list = Array.isArray(res?.data?.scans) ? res.data.scans : [];
+      // Always show latest scan at top
+      const sorted = [...list].sort((a, b) => new Date(b?.created_at).getTime() - new Date(a?.created_at).getTime());
+      setScans(sorted);
       setError(null);
     } catch (e) {
       setError(e.message);
